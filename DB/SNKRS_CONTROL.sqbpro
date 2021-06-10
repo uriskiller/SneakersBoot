@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/uriel/PycharmProjects/pythonProject/DB/SNKRS_CONTROL.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3191"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,15:mainsqlite_sequence"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="ACCOUNTS" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="88"/><column index="2" value="176"/><column index="3" value="187"/><column index="4" value="70"/><column index="5" value="241"/><column index="6" value="54"/><column index="7" value="106"/><column index="8" value="107"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="ACCOUNT_PARAMETERS_TYPES" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="213"/><column index="2" value="216"/><column index="3" value="54"/><column index="4" value="106"/><column index="5" value="107"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="EXAMPLE" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="64"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="STORES" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths/><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">
+
+CREATE TABLE STORES
+(
+	ID_STORE INTEGER PRIMARY KEY AUTOINCREMENT,
+	NAME_STORE VARCHAR(255) NOT NULL,
+	URL_STORE TEXT NOT NULL,
+	IMAGE_STORE TEXT NOT NULL,
+	ACTIVE INT DEFAULT 1 NOT NULL,
+	DATE_CREATED DATETIME DEFAULT CURRENT_TIMESTAMP,
+	DATE_UPDATED DATETIME
+)
+;
+
+--, FOREIGN KEY(ID_STORE) REFERENCES STORES(ID_STORE)
+
+CREATE TABLE ACCOUNTS
+(
+	ID_ACCOUNT INTEGER PRIMARY KEY AUTOINCREMENT,
+	USERNAME VARCHAR(255) NOT NULL,
+	PASSWORD VARCHAR(255) NOT NULL,
+	ID_STORE INTEGER NOT NULL,
+	ID_USER VARCHAR(36) NOT NULL,
+	ACTIVE INT DEFAULT 1,
+	DATE_CREATED DEFAULT CURRENT_TIMESTAMP,
+	DATE_UPDATED DATETIME,
+	FOREIGN KEY(ID_STORE) REFERENCES STORES(ID_STORE)
+);
+
+
+CREATE TABLE ACCOUNT_PARAMETERS_TYPES
+(
+	ID_ACCOUNT_PARAMETER_TYPE INTEGER PRIMARY KEY AUTOINCREMENT,
+	DESCRIPTION_PARAMETER_TYPE TEXT NOT NULL,
+	ACTIVE INT DEFAULT 1,
+	DATE_CREATED DATETIME DEFAULT CURRENT_TIMESTAMP,
+	DATE_UPDATED DATETIME
+);
+
+CREATE TABLE BLOCKS
+(
+	ID_BLOCK INTEGER PRIMARY KEY AUTOINCREMENT,
+	ID_ACCOUNT INTEGER NOT NULL,
+	ACTIVE INT DEFAULT 1,
+	DATE_CREATED DATETIME DEFAULT CURRENT_TIMESTAMP,
+	DATE_UPDATED DATETIME,
+	FOREIGN KEY(ID_ACCOUNT) REFERENCES ACCOUNTS(ID_ACCOUNT)
+);
+
+CREATE TABLE ACCOUNT_PARAMETERS
+(
+	ID_ACCOUNT_PARAMETER INTEGER PRIMARY KEY AUTOINCREMENT,
+	KEY_PARAMETER TEXT NOT NULL,
+	VALUE_PARAMETER TEXT NOT NULL,
+	ID_ACCOUNT_PARAMETER_TYPE INTEGER NOT NULL,
+	ID_BLOCK INTEGER NOT NULL,
+	DATE_CREATED DATETIME DEFAULT CURRENT_TIMESTAMP,
+	DATE_UPDATED DATETIME,
+	FOREIGN KEY (ID_ACCOUNT_PARAMETER_TYPE) REFERENCES ACCOUNT_PARAMETERS_TYPES(ID_ACCOUNT_PARAMETER_TYPE),
+	FOREIGN KEY(ID_BLOCK) REFERENCES BLOCKS(ID_BLOCK)
+);
+
+
+</sql><sql name="SQL 2">/*
+	INSERT DATA
+*/
+
+INSERT INTO STORES
+(NAME_STORE, URL_STORE, IMAGE_STORE)
+VALUES
+('NIKE', 'https://www.nike.com/mx/', 'nike.jpg'),
+('INNVICTUS', 'https://www.innvictus.com/', 'innvictus.jpg')
+;
+
+INSERT INTO ACCOUNTS
+(&quot;USERNAME&quot;, &quot;PASSWORD&quot;, &quot;ID_STORE&quot;, &quot;ID_USER&quot;)
+VALUES
+--('snkrs_supreme@hotmail.com', '3Nm%$!4P956H*$zQUuq3Hl%s', 1, 'e864d2f7-2faf-4c1b-b37d-50b78d8645a5')
+--('zerox.097@gmail.com', '$6I!2qJIFwJU1T@P', 2, 'e864d2f7-2faf-4c1b-b37d-50b78d8645a5')
+('esmo.ric@gmail.com', 'chelasmelapela123', 2, 'e864d2f7-2faf-4c1b-b37d-50b78d8645a5')
+;
+
+
+INSERT INTO ACCOUNT_PARAMETERS_TYPES
+(&quot;DESCRIPTION_PARAMETER_TYPE&quot;)
+VALUES
+--('COOKIES'),
+--('ADDRESS'),
+--('PAYMENTS'),
+--('CONTACT'),
+('PROXIES')
+;
+
+SELECT * FROM ACCOUNT_PARAMETERS_TYPES;</sql><current_tab id="1"/></tab_sql></sqlb_project>

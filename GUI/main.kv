@@ -1,0 +1,102 @@
+<Container>:
+    rows: 5
+    cols: 2
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: 1, None
+            height: '48dp'
+            Button:
+                text: 'Task'
+                on_release: sm.current = 'screen_tasks'
+            Button:
+                text: 'Windows'
+                on_release: sm.current = 'screen_windows'
+            Button:
+                text: 'Accounts'
+                on_release: sm.current = 'screen_accounts'
+            Button:
+                text: 'Proxies'
+                on_release: sm.current = 'screen_proxies'
+            Button:
+                text: 'Exit'
+                on_release: root.ExitButton()
+
+        ScreenManager:
+            id: sm
+            Tasks:
+            Windows:
+            Accounts:
+            Proxies:
+
+<Tasks>:
+    name: 'screen_tasks'
+    Button:
+        text: 'Tasks'
+
+<Windows>:
+    name: 'screen_windows'
+    orientation: "vertical"
+    link: link
+    proxy: proxy
+    link_text: link_text
+    proxy_text: proxy_text
+    BoxLayout:
+        orientation: "vertical"
+        rows: 5
+        BoxLayout:
+            orientation: "horizontal"
+            Label:
+                text: "Link"
+                height: "40dp"
+                size_hint_y: None
+            TextInput:
+                id: link_text
+                height: "40dp"
+                size_hint_y: None
+        BoxLayout:
+            orientation: "horizontal"
+            Label:
+                text: "Proxy"
+                height: "40dp"
+                size_hint_y: None
+            TextInput:
+                id: proxy_text
+                height: "40dp"
+                size_hint_y: None
+        ScrollView:
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    id: link
+                    font_size: dp(12)
+                Label:
+                    id: proxy
+                    font_size: dp(12)
+
+        BoxLayout:
+            orientation: "vertical"
+
+            Button:
+                height: "40dp"
+                size_hint_y: None
+                text: "Add"
+                on_release: root.AddItem()
+            Button:
+                height: "40dp"
+                size_hint_y: None
+                text: "Start"
+                on_release: root.Start()
+            Button:
+                height: "40dp"
+                size_hint_y: None
+                text: "Clear"
+                on_release: root.ClearItems()
+<Accounts>:
+    name: 'screen_accounts'
+    Button:
+        text: 'Accounts'
+<Proxies>:
+    name: 'screen_proxies'
+    Button:
+        text: 'Proxies'
