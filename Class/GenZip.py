@@ -3,7 +3,7 @@ import random
 
 class genZip:
     def __init__(self, host, port, username, password):
-        self.file = 'Class/temp/{0}_proxy_auth_plugin.zip'.format(random.randint(0, 1000000))
+        self.file = 'C:/SneakersBoot/temp/{0}_proxy_auth_plugin.zip'.format(random.randint(0, 1000000))
         self.host = host
         self.port = port
         self.username = username

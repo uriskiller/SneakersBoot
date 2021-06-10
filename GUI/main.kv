@@ -94,8 +94,22 @@
                 on_release: root.ClearItems()
 <Accounts>:
     name: 'screen_accounts'
-    Button:
-        text: 'Accounts'
+    BoxLayout:
+        orientation: "vertical"
+
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 3
+
+            Label:
+                text: "Username"
+            Label:
+                text: "Store"
+            Label:
+                text: "Active"
+
 <Proxies>:
     name: 'screen_proxies'
     Button:
